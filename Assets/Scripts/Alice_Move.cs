@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Alice_Move : MonoBehaviour {
 
@@ -15,35 +16,21 @@ public class Alice_Move : MonoBehaviour {
 	public float jForce = 700f;
 	public int k = 0;
 	
-	void Start () 
+	private void Start () 
 	{
-		anim = GetComponent<Animator> ();
+		anim = GetComponent<Animator>();
 	}
 	
-	void Update()
+	private void Update()
 	{
 		if (ground && Input.GetKeyDown (KeyCode.Space)) 
 		{
 			anim.SetBool("Ground",false);
 			GetComponent<Rigidbody2D>().AddForce(new Vector2(0,jForce));
 		}
-        /*
-		if (Input.GetKeyDown (KeyCode.A) && k == 0) {
-			anim.SetBool ("Attack", true);
-			k = 1;
-		} else {
-			if (Input.GetKeyDown (KeyCode.A) && k == 1)
-			{
-				anim.SetBool ("Attack", false);
-				k = 0;
-			}
-
-		}
-        */
-
 	}
-	// Update is called once per frame
-	void FixedUpdate () 
+	
+	private void FixedUpdate () 
 	{
 		ground = Physics2D.OverlapCircle (grCheck.position, grRadius, wtGround);
 		anim.SetBool ("Ground", ground);
@@ -67,11 +54,12 @@ public class Alice_Move : MonoBehaviour {
 		}
 	}
 	
-	void Flip()
+	private void Flip()
 	{
 		right = !right;
 		Vector3 theScale = transform.localScale;
 		theScale.x *= -1;
 		transform.localScale = theScale;
 	}
+	
 }
