@@ -38,6 +38,8 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Alice_Move.cs" />
      <Compile Include="Assets\Scripts\PlatformMovement.cs" />
+     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+     <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:/Unity/2020.1.8f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
