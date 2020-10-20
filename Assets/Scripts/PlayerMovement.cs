@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private Vector3 characterScale;
     private float characterScaleX;
+    private bool right = true;
 
     public float speed = 5f;
     public float jumpForce = 15f;
@@ -43,10 +44,12 @@ public class PlayerMovement : MonoBehaviour
         // Determines whether we trigger running animation given the conditions
         anim.SetFloat ("Speed", Mathf.Abs (x));
         
-        if (x < 0) {
+        if (x < 0 && right) {
             characterScale.x = -characterScaleX;
-        } else {
+            right = !right;
+        } else if (x > 0 && !right) {
             characterScale.x = characterScaleX;
+            right = !right;
         }
         transform.localScale = characterScale;
 
