@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce = 15f;
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2f;
+    public float peaked;
+    public bool test = false;
 
     private bool isGrounded = false;
     public Transform isGroundedChecker;
@@ -32,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
         Move();
         Jump();
         CheckIfGrounded();
+        CheckIfPeaked();
     }
 
     void Move() {
@@ -75,9 +78,22 @@ public class PlayerMovement : MonoBehaviour
             if (collider != null) {
                 anim.SetBool("Ground", true);
                 isGrounded = true;
+                
+                // Set Peaked to false and reassign peaked to ground level y again.
+                anim.SetBool("Peaked", false);
+                peaked = transform.position.y;
             } else {
                 anim.SetBool("Ground", false);
                 isGrounded = false;
             }
+    }
+
+    void CheckIfPeaked() {
+
+        if (transform.position.y < peaked) {
+            anim.SetBool("Peaked", true);
+        } else if (transform.position.y > peaked && !isGrounded) {
+            peaked = transform.position.y;
+        }
     }
 }
