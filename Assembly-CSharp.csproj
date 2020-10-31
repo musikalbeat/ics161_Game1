@@ -38,9 +38,10 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Alice_Move.cs" />
      <Compile Include="Assets\Scripts\PlatformMovement.cs" />
+     <Compile Include="Assets\Scripts\CollectManager.cs" />
+     <Compile Include="Assets\Scripts\Collectable.cs" />
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\CameraFollow.cs" />
-     <Compile Include="Assets\Scripts\Collectable.cs" />
      <Compile Include="Assets\Scripts\CanvasManager.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
