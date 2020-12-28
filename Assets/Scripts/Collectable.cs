@@ -13,7 +13,9 @@ public class Collectable : MonoBehaviour
             cm.GetComponent<CollectManager>().Collect();
             Destroy(this.gameObject);
         }
-        else if (other.tag == "Player" && this.gameObject.tag == "goal") {
+        
+        if (other.tag == "Player" && this.gameObject.tag == "goal") {
+            Debug.Log("Next Scene");
             scene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(scene.buildIndex + 1, LoadSceneMode.Single);
         }
