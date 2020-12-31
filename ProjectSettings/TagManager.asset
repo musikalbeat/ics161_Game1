@@ -6,6 +6,7 @@ TagManager:
   tags:
   - collect
   - goal
+  - Info
   layers:
   - Default
   - TransparentFX
