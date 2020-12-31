@@ -14,3 +14,6 @@ An issue I remember being critique about is the character being stuck to the wal
 
 ## Adjusting Animations
 The previous version used only 1 animation change when jumping, making the player look stiff. I haven't use the Animator much, but after messing with some of the settings the player now have a jump up animation and a falling animation.
+
+## Level Selection and Save System
+Usually platformers include a menu to select stages to re-attempt. I decided it would be a neat feature and that I could also use it to test out a save system. The save system would record the current stage the player last stopped at and also record the stars collected per stage after they touch the goal.
