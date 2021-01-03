@@ -24,6 +24,7 @@ public class Collectable : MonoBehaviour
             Debug.Log("Next Scene");
             scene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(scene.buildIndex + 1, LoadSceneMode.Single);
+            info.GetComponent<PlayerManager>().UpdateLevel( int.Parse(scene.name), cm.GetComponent<CollectManager>().collected );
         }
     }
 }

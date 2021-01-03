@@ -7,8 +7,8 @@ using TMPro;
 public class CollectManager : MonoBehaviour
 {
     public TMP_Text starText;
-    int starCount;
-    int collected;
+    public int starCount;
+    public int collected;
 
     void Start() {
         starCount = 3;
