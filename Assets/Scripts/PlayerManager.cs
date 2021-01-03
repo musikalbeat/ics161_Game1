@@ -14,16 +14,21 @@ public class levelStarsProxy
 public class PlayerManager : MonoBehaviour
 {
     // Player Info
-    public int currentLevel = 0;
+    public int currentLevel = 1;
     public List<levelStarsProxy> achievement = new List<levelStarsProxy>();
 
     // Game Info
+    // Screen --> Stage Screen --> Stage Panel --> Content
     public GameObject stageContent;
     private int maxStages = 6;
     private Transform stage;
     private Transform starsContainer;
 
-    // Start is called before the first frame update
+    void Start()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     void Awake()
     {
         for (int i = 0; i < maxStages; i++)

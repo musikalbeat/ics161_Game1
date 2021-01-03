@@ -8,6 +8,7 @@ public class CanvasManager : MonoBehaviour
 {
     public GameObject titleMenu;
     public GameObject stageMenu;
+    public GameObject info;
 
     private void Start()
     {
@@ -27,7 +28,7 @@ public class CanvasManager : MonoBehaviour
 
     public void NextLevel()
     {
-        SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex+1) % SceneManager.sceneCountInBuildSettings);
+        SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex + info.GetComponent<PlayerManager>().currentLevel );
     }
 
     public void openLevelMenu()

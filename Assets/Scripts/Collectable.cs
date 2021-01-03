@@ -6,8 +6,14 @@ using UnityEngine.SceneManagement;
 public class Collectable : MonoBehaviour
 {
     public GameObject cm;
+    public GameObject info;
     private Scene scene;
     
+    private void Start()
+    {
+        info = GameObject.Find("Info");
+    }
+
     void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "Player" && this.gameObject.tag == "collect") {
             cm.GetComponent<CollectManager>().Collect();
