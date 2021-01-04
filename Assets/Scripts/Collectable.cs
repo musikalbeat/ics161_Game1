@@ -21,10 +21,18 @@ public class Collectable : MonoBehaviour
         }
         
         if (other.tag == "Player" && this.gameObject.tag == "goal") {
+            // Update player info: CurrentLevel and Level Selection Screen
+            info.GetComponent<PlayerManager>().currentLevel += 1;
+            info.GetComponent<PlayerManager>().UpdateLevel( int.Parse(scene.name), cm.GetComponent<CollectManager>().collected );
+            
+            // Saves data before moving to new stage
+            
+
+            // Moves player into next stage
             Debug.Log("Next Scene");
             scene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(scene.buildIndex + 1, LoadSceneMode.Single);
-            info.GetComponent<PlayerManager>().UpdateLevel( int.Parse(scene.name), cm.GetComponent<CollectManager>().collected );
+            
         }
     }
 }
