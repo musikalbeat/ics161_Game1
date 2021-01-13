@@ -14,6 +14,17 @@ public class CanvasManager : MonoBehaviour
     {
         titleMenu.SetActive(true);
         stageMenu.SetActive(false);
+
+        Debug.Log("Checking for save...");
+        if (SaveSystem.SaveFound())
+        {
+            Debug.Log("Save found...");
+            info.GetComponent<SaveManager>().LoadGame();
+        }
+        else
+        {
+            Debug.Log("Save not found...");   
+        }
     }
 
     public void QuitGame()

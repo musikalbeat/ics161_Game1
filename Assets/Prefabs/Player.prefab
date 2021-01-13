@@ -284,7 +284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  jumpForce: 10
+  jumpForce: 12
   fallMultiplier: 2.5
   lowJumpMultiplier: 2
   peaked: 0

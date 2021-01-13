@@ -25,6 +25,7 @@ public class CollectManager : MonoBehaviour
     }
 
     public void returnHome() {
+        Debug.Log("Returning to title...");
         SceneManager.LoadScene(0);
     }
 }

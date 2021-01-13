@@ -15,55 +15,59 @@ public class PlayerManager : MonoBehaviour
 {
     // Player Info
     public int currentLevel = 1;
-    public List<levelStarsProxy> achievement = new List<levelStarsProxy>();
+    public Dictionary<int, int> stageProgress = new Dictionary<int, int>();
 
     // Game Info
     // Screen --> Stage Screen --> Stage Panel --> Content
     public GameObject stageContent;
     private int maxStages = 6;
+
     private Transform stage;
     private Transform starsContainer;
 
-    void Start()
-    {
-        DontDestroyOnLoad(this.gameObject);
-    }
-
-    void Awake()
-    {
-        for (int i = 0; i < maxStages; i++)
-        {
-            achievement.Add(new levelStarsProxy { levelIndex = i, starAmount = 0 });
-        }
-    }
-
+    // Updates the dictionary of stage levels with star earned during gameplay
     public void UpdateLevel(int level, int starsEarned)
     {
-        stage = stageContent.transform.GetChild(level-1);
-        starsContainer = stage.transform.GetChild(1);
-        
-        if ( starsEarned == 0)
+        if (stageProgress.ContainsKey(level))
         {
-            starsContainer.gameObject.SetActive(false);
-        }
-        else if ( starsEarned == 1)
-        {
-            starsContainer.gameObject.SetActive(true);
-            starsContainer.transform.GetChild(0).gameObject.SetActive(false);
-            starsContainer.transform.GetChild(0).gameObject.SetActive(false);
-        }
-        else if ( starsEarned == 2)
-        {
-            starsContainer.gameObject.SetActive(true);
-            starsContainer.transform.GetChild(0).gameObject.SetActive(true);
-            starsContainer.transform.GetChild(0).gameObject.SetActive(false);
+            stageProgress[level] = starsEarned;
         }
         else
         {
-            starsContainer.gameObject.SetActive(true);
-            starsContainer.transform.GetChild(0).gameObject.SetActive(true);
-            starsContainer.transform.GetChild(0).gameObject.SetActive(true);
+            stageProgress.Add(level, starsEarned);
         }
     }
 
+    // Updates the Level Selection menu out while on the Title scene
+    public void UpdateSelection()
+    {
+        for (int level = 0; level < stageProgress.Count; level++)
+        {
+            stage = stageContent.transform.GetChild(level);
+            starsContainer = stage.transform.GetChild(1);
+
+            if ( stageProgress[level+1] == 0)
+            {
+                starsContainer.gameObject.SetActive(false);
+            }
+            else if ( stageProgress[level+1] == 1)
+            {
+                starsContainer.gameObject.SetActive(true);
+                starsContainer.transform.GetChild(0).gameObject.SetActive(true); // Star 2
+                starsContainer.transform.GetChild(1).gameObject.SetActive(true); // Star 1
+            }
+            else if ( stageProgress[level+1] == 2)
+            {
+                starsContainer.gameObject.SetActive(true);
+                starsContainer.transform.GetChild(0).gameObject.SetActive(true);
+                starsContainer.transform.GetChild(1).gameObject.SetActive(false);
+            }
+            else
+            {
+                starsContainer.gameObject.SetActive(true);
+                starsContainer.transform.GetChild(0).gameObject.SetActive(false);
+                starsContainer.transform.GetChild(1).gameObject.SetActive(false);
+            }
+        }
+    }
 }

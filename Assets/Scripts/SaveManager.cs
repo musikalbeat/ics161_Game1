@@ -18,28 +18,30 @@ public class SaveManager : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        if (GameObject.FindGameObjectWithTag("Info") == null)
+        {
+            DontDestroyOnLoad(this.gameObject);
+        }
         SaveSystem.Init();
+        // Locate the PlayerManager script
+        pm = GameObject.FindGameObjectWithTag("Info").GetComponent<PlayerManager>();
     }
 
     public void SaveGame()
     {
-        // Locate the PlayerManager script
-        pm = GameObject.FindGameObjectWithTag("Info").GetComponent<PlayerManager>();
-
         // Create a new save object to store information into a dictionary
         SaveObject saveObj = new SaveObject
         {
             currentLevel = pm.currentLevel,
-            StarAmounts = new List<int>(pm.achievement.Count)
+            StarAmounts = new List<int>(pm.stageProgress.Count)
         };
 
-        // Loop through the player inventory and assign the item amounts into the ItemAmounts list.
-        foreach (levelStarsProxy proxy in pm.achievement)
+        foreach (KeyValuePair<int,int> pair in pm.stageProgress)
         {
-            saveObj.StarAmounts.Add(proxy.starAmount);
+            saveObj.StarAmounts.Add(pair.Value);
         }
 
+        Debug.Log("Saving...");
         // Converts dictionary into JSON file
         string json = JsonUtility.ToJson(saveObj);
         // Save JSON file into a file on your computer
@@ -49,13 +51,13 @@ public class SaveManager : MonoBehaviour
     public void LoadGame()
     {
         SaveObject loadedSave = JsonUtility.FromJson<SaveObject>( SaveSystem.Load() );
-        Debug.Log("Game loaded...");
+        Debug.Log("Loading...");
         StartCoroutine( LoadingValues(loadedSave) );
     }
 
     IEnumerator LoadingValues(SaveObject loadedSave)
     {
-        while (SceneManager.GetActiveScene().buildIndex != 1)
+        while (SceneManager.GetActiveScene().buildIndex != 0)
         {
             Debug.Log("Wait");
             yield return new WaitForSecondsRealtime(0.5f);
@@ -65,12 +67,21 @@ public class SaveManager : MonoBehaviour
         // Locate the PlayerManager script
         pm = GameObject.FindGameObjectWithTag("Info").GetComponent<PlayerManager>();
 
+        pm.currentLevel = loadedSave.currentLevel;
+
         for (int i = 0; i < loadedSave.StarAmounts.Count; i++) 
         {
-            pm.achievement[i].starAmount = loadedSave.StarAmounts[i];
+            if (pm.stageProgress.ContainsKey(i+1) == true)
+            {
+                pm.stageProgress[i+1] = loadedSave.StarAmounts[i];
+            }
+            else
+            {
+                pm.stageProgress.Add(i+1, loadedSave.StarAmounts[i]);
+            }
         }
 
         // Make sure that UpdateUI() is public in PlayerManager
-        //pm.UpdateLevel();
+        pm.UpdateSelection();
     }
 }
