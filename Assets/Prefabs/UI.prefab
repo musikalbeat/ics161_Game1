@@ -758,6 +758,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7325625499665480124}
   - component: {fileID: 7325625499665480125}
+  - component: {fileID: 5012069937712280545}
   m_Layer: 0
   m_Name: ShineEffect
   m_TagString: Untagged
@@ -830,6 +831,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5012069937712280545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7325625499665480127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10e672a68abf2384598b38ed00599a51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7325625500245575806
 GameObject:
   m_ObjectHideFlags: 0
